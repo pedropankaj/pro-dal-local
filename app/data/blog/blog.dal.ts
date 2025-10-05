@@ -26,6 +26,7 @@ export class BlogDAL {
     const rows = await prisma.article.findMany({
       orderBy: { createdAt: "desc" },
     });
+
     return rows.map((r) => ({
       id: r.id,
       title: r.title,

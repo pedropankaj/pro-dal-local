@@ -8,18 +8,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { BlogDAL } from "@/app/data/blog/blog.dal";
+import Navbar from "@/components/web/Navbar";
 
 async function getArticles() {
-  const blog = await BlogDAL.public();
-  return blog.listArticles();
+  const blog = (await BlogDAL.public()).listArticles();
+  return blog;
 }
 
 export default async function Home() {
   const articles = await getArticles();
 
   return (
-    <div className="space-y-10">
-      <header className="mx-auto max-w-6xl px-4 pt-8 text-center sm:px-6 lg:px-8">
+    <div className="space-y-10 mb-24">
+      <Navbar />
+      <header className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Next.js DAL & DTO Demo
         </h1>
@@ -42,9 +44,9 @@ export default async function Home() {
             {articles.map((a) => (
               <Card
                 key={a.id}
-                className="group overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+                className="group overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg pt-0"
               >
-                <div className="relative h-40 w-full overflow-hidden bg-muted">
+                <div className="relative h-52 w-full overflow-hidden bg-muted">
                   <img
                     src={a.image}
                     alt={a.title}
